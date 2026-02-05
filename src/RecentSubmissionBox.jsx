@@ -9,7 +9,7 @@ const RecentSubmissionBox = ({title, difficulty, acRate, timestamp}) => {
         var bgColor = "bg-red-100"
     }
     else if(difficulty === "Medium"){
-        var color = "text-yellow-800"
+        var color = "text-blue-800"
         var bgColor = "bg-yellow-100"
     }
     else if(difficulty === "Easy"){
