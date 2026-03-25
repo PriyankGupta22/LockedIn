@@ -35,7 +35,7 @@ const Navbar = () => {
 }}, [open]);
 
   return (
-    <div className='w-screen h-[100px] flex flex-row items-center relative text-[19px] font-inter text-black'>
+    <div className='w-full h-[100px] flex flex-row items-center relative text-[19px] font-inter text-black'>
         
             <Link to = "/dash" className = " absolute  left-[100px] text-[35px]">LockedIn</Link>
         
@@ -55,7 +55,7 @@ const Navbar = () => {
                 <div className = "h-[3px] w-0 bg-black transition-all duration-400 group-hover:w-[67px]"></div>
                 </Link>
           
-                <Link to = "/searchUser" className = "flex flex-col group">
+                <Link to = "/searchfriend" className = "flex flex-col group">
                 SearchUser
                 <div className = "h-[3px] w-0 bg-black transition-all duration-400 group-hover:w-[107px]"></div>
                 </Link>

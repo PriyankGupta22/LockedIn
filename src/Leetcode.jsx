@@ -4,14 +4,18 @@ import axios from 'axios'
 import { TbBrandCpp } from "react-icons/tb";
 import { LuFlame } from "react-icons/lu";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import Topic from './components/Topic'
 
 import Level from './Level';
 import RecentSubmissionBox from './RecentSubmissionBox';
 
 const Leetcode = () => {
 
-    const user = "Priyank_Gupta_"
+    const user = "Priyanshu_singh001"
     const [data, setData] = useState(null)
+    const [langList, setLangList] = useState([])
+    const [langNumList, setLangNumList] = useState([])
+
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/leetcode/${user}`)
@@ -23,11 +27,27 @@ const Leetcode = () => {
         })
     }, [])
 
+    useEffect(() => {
+  if (data?.languages) {
+    const names = [];
+    const nums = [];
+
+    data.languages.forEach(lang => {
+      names.push(lang.langName);
+      nums.push(lang.totalNumber);
+    });
+
+    setLangList(names);
+    setLangNumList(nums);
+  }
+}, [data]);
+
     console.log(data?.recentSubmissions)
     
     const totalAcceptanceRate = data?.acceptanceRate
   ? Number(data.acceptanceRate).toFixed(1)
   : "0.0";
+
 
   if (!data) {
   return (
@@ -90,8 +110,16 @@ const Leetcode = () => {
       </div>
 
       <div className = "w-[1327px] h-[450px] absolute left-[100px] top-[470px] flex flex-row gap-[55px]">
-        <div className = "w-[636px] h-[450px] border border-black"></div>
-        <div className = "w-[636px] h-[450px] border border-black"></div>
+        <div className = "w-[636px] h-[450px] border border-neutral-300 rounded-[5px] flex items-center justify-center flex-col">
+            <div className = "h-[100px] w-[550px]"></div>
+            <div className = "h-[250px] w-[520px] flex items-center pt-[10px]">
+                <Topic langList = {langList} langNumList = {langNumList} />
+            </div>
+            
+        </div>
+        <div className = "w-[636px] h-[450px] border border-black">
+
+        </div>
       </div>
 
     
