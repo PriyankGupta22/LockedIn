@@ -16,6 +16,8 @@ const Dash = () => {
     const [open, setOpen]  = useState(false)
     const [platform, setPlatform] = useState("leetcode")
     const dropref = useRef(null)
+    const headerRef = useRef(null)
+    const buttonRef = useRef(null)
 
    useLayoutEffect(() => {
    if (open && dropref.current) {
@@ -35,9 +37,24 @@ const Dash = () => {
    }
 }, [open]);
 
+    useLayoutEffect(() => {
+        if (headerRef.current) {
+            gsap.fromTo(headerRef.current,
+                { x: -50, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+            )
+        }
+        if (buttonRef.current) {
+            gsap.fromTo(buttonRef.current,
+                { x: 50, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+            )
+        }
+    }, [])
+
   return (
     <div className = "relative">
-    <div className = "h-[160px] w-screen font-interrelative flex flex-row items-center">
+    <div className = "h-[160px] w-full font-inter relative flex flex-row items-center">
         <div className = "h-[150px] w-[150px]  ml-[300px] mt-[-100px] -z-30  bg-zinc-100"></div>
         <div className = "h-[160px] w-[160px]  ml-[600px] mt-[130px] -z-30  bg-zinc-100"></div>
       <div className = "h-[100px] w-[600px]  absolute left-[100px]">
