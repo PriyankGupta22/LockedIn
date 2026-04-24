@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import 'tailwindcss';
+@theme{
+    --font-inter: 'Inter', 'sans-serif';
+    --font-sora: 'Sora', 'sans-serif';
+    --font-mono: 'JetBrains Mono', 'monospace';
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    overflow-x: hidden;
+    background-color: #0F172A; /* Slate-900 */
+    color: #F8FAFC; /* Slate-50 */
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.glass {
+    background: rgba(30, 41, 59, 0.7); /* Slate-800 with opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-hover {
+    transition: all 0.3s ease;
+}
+
+.glass-hover:hover {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(245, 158, 11, 0.3); /* Amber accent */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
