@@ -56,7 +56,7 @@ const Leetcode = () => {
 
   return (
     <div className="w-full max-w-[1300px] mx-auto py-10 flex flex-col items-center gap-10">
-      {/* Top Stats Cards */}
+      {}
       <div className="w-full flex flex-col lg:flex-row gap-8 justify-center">
         <div className="w-full lg:w-[700px] h-[220px] flex justify-center flex-col relative bg-zinc-900 rounded-lg overflow-hidden p-8 shadow-sm">
             <div className="absolute left-[30px] top-[20px] text-[13px] font-bold text-zinc-500 tracking-wider">
@@ -95,14 +95,14 @@ const Leetcode = () => {
         </div>
       </div>
 
-      {/* Difficulty Levels */}
+      {}
       <div className="w-full flex flex-col md:flex-row gap-8 justify-center">
         <Level level="EASY" icon={<IoMdCheckmarkCircleOutline className="h-[30px] w-[30px] text-green-700"/>} solved={data.easy} total={300} bgColor="bg-green-50" textColor="text-green-700" borderColor="border-green-200" barColor="bg-green-600"/>
         <Level level="MEDIUM" icon={<IoMdCheckmarkCircleOutline className="h-[30px] w-[30px] text-yellow-700"/>} solved={data.medium} total={1200} bgColor="bg-yellow-50" textColor="text-yellow-700" borderColor="border-yellow-200" barColor="bg-yellow-600"/>
         <Level level="HARD" icon={<IoMdCheckmarkCircleOutline className="h-[30px] w-[30px] text-red-700"/>} solved={data.hard} total={300} bgColor="bg-red-50" textColor="text-red-700" borderColor="border-red-200" barColor="bg-red-600"/>
       </div>
 
-      {/* Topics and Charts Section */}
+      {}
       <div className="w-full flex flex-col lg:flex-row gap-8 justify-center mb-10">
         <div className="w-full lg:w-[636px] min-h-[450px] border border-zinc-200 rounded-lg flex flex-col items-center justify-center p-8 bg-white shadow-sm">
             <h3 className="text-[13px] font-bold text-zinc-500 self-start mb-6 tracking-wider uppercase">Languages Used</h3>
@@ -115,7 +115,7 @@ const Leetcode = () => {
         </div>
       </div>
 
-      {/* Recent Submissions */}
+      {}
       <div className="w-full max-w-[1100px] border border-zinc-200 rounded-lg bg-white shadow-sm overflow-hidden mb-20">
             <div className="px-10 py-8 border-b border-zinc-100">
                 <div className="font-extrabold text-[14px] text-zinc-900 tracking-wider">
