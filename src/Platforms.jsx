@@ -163,4 +163,3 @@ const Platforms = () => {
 }
 
 export default Platforms
-
