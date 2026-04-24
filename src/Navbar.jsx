@@ -35,52 +35,50 @@ const Navbar = () => {
 }}, [open]);
 
   return (
-    <div className='w-full h-[100px] flex flex-row items-center relative text-[19px] font-inter text-black'>
-        
-            <Link to = "/dash" className = " absolute  left-[100px] text-[35px]">LockedIn</Link>
-        
-        <div className = "absolute  left-[800px] flex gap-[60px]">
-                <Link to = "/platforms" className = "flex flex-col group">
-                Platforms
-                <div className = "h-[3px] w-0 bg-black transition-all duration-400 group-hover:w-[85px]"></div>
-                </Link>
+    <div className='w-full h-[100px] flex items-center bg-white border-b border-zinc-100 sticky top-0 z-[100]'>
+        <div className="w-full max-w-[1300px] mx-auto px-6 flex flex-row items-center justify-between font-inter text-[17px] text-black">
             
-                <Link to = "/rankings" className = "flex flex-col group">
-                Rankings
-                <div className = "h-[3px] w-0 bg-black transition-all duration-400 group-hover:w-[83px]"></div>
-                </Link>
+            <Link to="/dash" className="text-[32px] font-black tracking-tighter">LockedIn</Link>
             
-                <Link to = "/friends" className = "flex flex-col group">
-                Friends
-                <div className = "h-[3px] w-0 bg-black transition-all duration-400 group-hover:w-[67px]"></div>
-                </Link>
-          
-                <Link to = "/searchfriend" className = "flex flex-col group">
-                SearchUser
-                <div className = "h-[3px] w-0 bg-black transition-all duration-400 group-hover:w-[107px]"></div>
-                </Link>
-
-            
-        </div>
-        <div className = "absolute right-[100px] ">
-        <div className = " relative flex justify-center ">
-        <button onClick={() => setOpen(!open)} className = "h-[40px] w-[40px] rounded-[20px]  bg-black flex items-center justify-center">
-            <LuUserRound className = "h-[23px] w-[23px] text-white"/>
-        </button>
-            <div ref = {profileref} className = {`h-[160px] w-[50px]  absolute left-[90px] flex flex-col items-center gap-[15px] ${open ? "pointer-events-auto" : "pointer-events-none"}`}>
-                    <Link to = "/profile" className = "profilediv">
-                    <div  className = "h-[40px] w-[40px] rounded-[20px] bg-black flex items-center justify-center">
-                        <LuUserRound className = "h-[23px] w-[23px] text-white"/>
-                    </div>
+            <div className="hidden lg:flex gap-10 items-center">
+                    <Link to="/platforms" className="flex flex-col group relative py-2">
+                        Platforms
+                        <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-black transition-all duration-300 group-hover:w-full"></div>
                     </Link>
-                    <Link to = "/settings" className = "profilediv h-[50px] w-[50px] hover:bg-zinc-100 rounded-[5px] flex items-center justify-center z-10">
-                    <IoMdSettings className = "h-[30px] w-[30px] text-black hover:rotate-90 transition-transform duration-400"/>
+                
+                    <Link to="/rankings" className="flex flex-col group relative py-2">
+                        Rankings
+                        <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-black transition-all duration-300 group-hover:w-full"></div>
                     </Link>
-                    <Link to = "/logOut" className = "profilediv h-[50px] w-[50px] hover:bg-zinc-100 rounded-[5px] flex items-center justify-center z-10">
-                    <IoMdLogOut className = "h-[30px] w-[30px] text-red-600"/>
-                    </Link>                   
+                
+                    <Link to="/friends" className="flex flex-col group relative py-2">
+                        Friends
+                        <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-black transition-all duration-300 group-hover:w-full"></div>
+                    </Link>
+              
+                    <Link to="/searchfriend" className="flex flex-col group relative py-2">
+                        SearchUser
+                        <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-black transition-all duration-300 group-hover:w-full"></div>
+                    </Link>
             </div>
-        </div>
+
+            <div className="relative flex items-center">
+                <button onClick={() => setOpen(!open)} className="h-[45px] w-[45px] rounded-full bg-black flex items-center justify-center hover:scale-110 transition-transform shadow-md">
+                    <LuUserRound className="h-[24px] w-[24px] text-white"/>
+                </button>
+                
+                <div ref={profileref} className={`absolute right-0 top-[60px] flex flex-col items-center gap-3 bg-white p-3 rounded-xl shadow-2xl border border-zinc-100 transition-all ${open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"}`}>
+                        <Link to="/profile" className="profilediv h-[45px] w-[45px] rounded-full bg-zinc-900 flex items-center justify-center hover:bg-black transition-colors">
+                            <LuUserRound className="h-[22px] w-[22px] text-white"/>
+                        </Link>
+                        <Link to="/settings" className="profilediv h-[45px] w-[45px] hover:bg-zinc-100 rounded-full flex items-center justify-center transition-colors">
+                            <IoMdSettings className="h-[28px] w-[28px] text-black hover:rotate-90 transition-transform duration-500"/>
+                        </Link>
+                        <Link to="/logOut" className="profilediv h-[45px] w-[45px] hover:bg-red-50 rounded-full flex items-center justify-center transition-colors">
+                            <IoMdLogOut className="h-[28px] w-[28px] text-red-600"/>
+                        </Link>                   
+                </div>
+            </div>
         </div>
     </div>
   )

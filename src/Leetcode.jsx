@@ -12,35 +12,32 @@ import RecentSubmissionBox from './RecentSubmissionBox';
 const Leetcode = () => {
 
     const user = "Priyanshu_singh001"
-    const [data, setData] = useState(null)
-    const [langList, setLangList] = useState([])
-    const [langNumList, setLangNumList] = useState([])
-
+    const [data, setData] = useState({
+        solved: 452,
+        total: 3300,
+        easy: 156,
+        medium: 245,
+        hard: 51,
+        acceptanceRate: "62.5",
+        languages: [
+            { langName: "C++", totalNumber: 280 },
+            { langName: "Python", totalNumber: 120 },
+            { langName: "Java", totalNumber: 52 }
+        ],
+        recentSubmissions: [
+            { id: 1, questionDetails: { title: "Two Sum", difficulty: "Easy", acRate: "50.1" }, timestamp: "2 hours ago" },
+            { id: 2, questionDetails: { title: "3Sum", difficulty: "Medium", acRate: "33.5" }, timestamp: "5 hours ago" },
+            { id: 3, questionDetails: { title: "Trapping Rain Water", difficulty: "Hard", acRate: "59.2" }, timestamp: "1 day ago" },
+            { id: 4, questionDetails: { title: "Longest Substring Without Repeating Characters", difficulty: "Medium", acRate: "34.1" }, timestamp: "2 days ago" },
+            { id: 5, questionDetails: { title: "Median of Two Sorted Arrays", difficulty: "Hard", acRate: "37.4" }, timestamp: "3 days ago" }
+        ]
+    })
+    const [langList, setLangList] = useState(["C++", "Python", "Java"])
+    const [langNumList, setLangNumList] = useState([280, 120, 52])
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/leetcode/${user}`)
-        .then((res) => {
-            console.log(res)
-            setData(res.data)
-        }).catch((err) => {
-            console.log(err)
-        })
+        // Data is now hardcoded for showing purposes
     }, [])
-
-    useEffect(() => {
-  if (data?.languages) {
-    const names = [];
-    const nums = [];
-
-    data.languages.forEach(lang => {
-      names.push(lang.langName);
-      nums.push(lang.totalNumber);
-    });
-
-    setLangList(names);
-    setLangNumList(nums);
-  }
-}, [data]);
 
     console.log(data?.recentSubmissions)
     
@@ -58,95 +55,94 @@ const Leetcode = () => {
 }
 
   return (
-    <div className = "w-screen h-[2400px] mt-[40px] relative overflow-visible flex flex-col items-center">
-      <div className = "w-[1327px] h-[220px] absolute left-[100px] flex flex-row gap-[55px]">
-        <div className = "w-[700px] h-[220px] flex justify-center flex-col relative bg-slate-900 rounded-[6px] overflow-hidden">
-            <div className = "h-[100px] w-[100px] absolute left-[602px] bottom-[133px] z-10 bg-yellow-300 opacity-10 rounded-[5px]"></div>
-            <div className = "h-[140px] w-[140px] absolute left-[100px] top-[130px] z-9 bg-green-300 opacity-10 rounded-[5px]"></div>
-            <div className = "h-[40px] w-[400px] absolute left-[30px] top-[20px] flex items-center text-[15px] font-bold text-gray-500">
+    <div className="w-full max-w-[1300px] mx-auto py-10 flex flex-col items-center gap-10">
+      {/* Top Stats Cards */}
+      <div className="w-full flex flex-col lg:flex-row gap-8 justify-center">
+        <div className="w-full lg:w-[700px] h-[220px] flex justify-center flex-col relative bg-zinc-900 rounded-lg overflow-hidden p-8 shadow-sm">
+            <div className="absolute left-[30px] top-[20px] text-[13px] font-bold text-zinc-500 tracking-wider">
                 TOTAL PROBLEMS SOLVED
             </div>
-            <div className = "h-[60px] w-[200px]  absolute left-[30px] top-[70px] flex flex-row">
-                <div className = "h-[60px] w-[120px]  text-[60px] flex items-center font-semibold text-white">{data.solved}</div>
-                <div className = "h-[60px] w-[120px]  text-[25px] flex items-center ml-[15px] mt-[10px] font-bold text-gray-500">/ {data.total}</div>
+            <div className="flex flex-row items-baseline mt-4">
+                <div className="text-[60px] font-bold text-white leading-none">{data.solved}</div>
+                <div className="text-[24px] font-bold text-zinc-500 ml-3">/ {data.total}</div>
             </div>
-            <div className = "h-[30px] w-[650px]  absolute left-[30px] top-[140px] flex flex-row items-center z-10">
-                <div className = "h-[12px] w-[550px] flex items-center bg-gray-600 rounded-[4px]">
-                    <div className = "h-[12px] bg-white rounded-[4px]" style = {{width: `${(550)*(data.solved/data.total)}px`}}></div>
+            <div className="w-full mt-6 flex flex-row items-center gap-4">
+                <div className="flex-1 h-[12px] bg-zinc-700 rounded-full overflow-hidden">
+                    <div className="h-full bg-white transition-all duration-500" style={{width: `${(data.solved/data.total)*100}%`}}></div>
                 </div>
-                <div className = "h-[30px] w-[40px]  ml-[15px] font-semibold text-[16px] flex items-center mt-[-2px] text-white">{data.solved/20}%</div>
+                <div className="font-bold text-[16px] text-white">{(data.solved/data.total*100).toFixed(1)}%</div>
             </div>
         </div>
-        <div className = "w-[260px] h-[220px] border border-gray-300 flex flex-col justify-center pl-[30px] rounded-[6px] overflow-hidden z-10 bg-white relative">
-            <div className = "h-[100px] w-[100px] bg-slate-100 rounded-[6px] -z-10 absolute top-[150px] right-[180px]"></div>
-            <div className = "w-[60px] h-[60px] flex items-center">
-                <TbBrandCpp className = "w-[40px] h-[40px] text-slate-900"/>
-            </div>
-            <div className = "w-[150px] h-[60px] flex items-center text-[14px] font-bold text-slate-500">
+        
+        <div className="w-full lg:w-[260px] h-[220px] border border-zinc-200 flex flex-col justify-center px-8 rounded-lg bg-white shadow-sm transition-transform hover:scale-[1.02]">
+            <TbBrandCpp className="w-10 h-10 text-zinc-900 mb-4"/>
+            <div className="text-[13px] font-bold text-zinc-500 mb-1">
                 ACCEPTANCE RATE
             </div>
-            <div className = "w-[80px] h-[60px] flex items-center text-slate-900 font-bold text-[40px]">
+            <div className="text-zinc-900 font-bold text-[40px] leading-tight">
                 {totalAcceptanceRate}%
             </div>
         </div>
-        <div className = "w-[260px] h-[220px] border border-gray-300 flex flex-col justify-center pl-[30px] rounded-[6px] overflow-hidden z-10 bg-white relative">
-            <div className = "h-[100px] w-[100px] bg-yellow-900 opacity-7 rounded-[6px] -z-10 absolute left-[180px] top-[-5px]"></div>
-            <div className = "w-[60px] h-[60px] flex items-center">
-                <LuFlame className = "w-[40px] h-[40px] text-yellow-700"/>
-            </div>
-            <div className = "w-[150px] h-[60px] flex items-center text-[14px] font-bold text-slate-500">
+        
+        <div className="w-full lg:w-[260px] h-[220px] border border-zinc-200 flex flex-col justify-center px-8 rounded-lg bg-white shadow-sm transition-transform hover:scale-[1.02]">
+            <LuFlame className="w-10 h-10 text-orange-500 mb-4"/>
+            <div className="text-[13px] font-bold text-zinc-500 mb-1">
                 CURRENT STREAK
             </div>
-            <div className = "w-[150px] h-[60px] flex items-center text-slate-900 font-bold text-[40px]">
-                10 <p className = "text-slate-500 text-[14px] font-bold ml-[10px] mt-[19px]">DAYS</p>
+            <div className="flex items-baseline gap-2 text-zinc-900 font-bold text-[40px] leading-tight">
+                10 <span className="text-zinc-500 text-[13px]">DAYS</span>
             </div>
         </div>
       </div>
 
-      <div className = "w-[1327px] h-[170px] absolute left-[100px] top-[260px] flex flex-row gap-[55px]">
-        <Level level = "EASY" icon = {<IoMdCheckmarkCircleOutline className = "h-[30px] w-[30px] text-green-900"/>} solved = {data.easy} total = {300} bgColor = "bg-green-50" textColor = "text-green-900" borderColor = "border-green-300 " barColor = "bg-green-900"/>
-        <Level level = "MEDIUM" icon = {<IoMdCheckmarkCircleOutline className = "h-[30px] w-[30px] text-yellow-900"/>} solved = {data.medium} total = {1200} bgColor = "bg-yellow-50" textColor = "text-yellow-900" borderColor = "border-yellow-300" barColor = "bg-yellow-900"/>
-        <Level level = "HARD" icon = {<IoMdCheckmarkCircleOutline className = "h-[30px] w-[30px] text-red-900"/>} solved = {data.hard} total = {300} bgColor = "bg-red-50" textColor = "text-red-900" borderColor = "border-red-300" barColor = "bg-red-900"/>
+      {/* Difficulty Levels */}
+      <div className="w-full flex flex-col md:flex-row gap-8 justify-center">
+        <Level level="EASY" icon={<IoMdCheckmarkCircleOutline className="h-[30px] w-[30px] text-green-700"/>} solved={data.easy} total={300} bgColor="bg-green-50" textColor="text-green-700" borderColor="border-green-200" barColor="bg-green-600"/>
+        <Level level="MEDIUM" icon={<IoMdCheckmarkCircleOutline className="h-[30px] w-[30px] text-yellow-700"/>} solved={data.medium} total={1200} bgColor="bg-yellow-50" textColor="text-yellow-700" borderColor="border-yellow-200" barColor="bg-yellow-600"/>
+        <Level level="HARD" icon={<IoMdCheckmarkCircleOutline className="h-[30px] w-[30px] text-red-700"/>} solved={data.hard} total={300} bgColor="bg-red-50" textColor="text-red-700" borderColor="border-red-200" barColor="bg-red-600"/>
       </div>
 
-      <div className = "w-[1327px] h-[450px] absolute left-[100px] top-[470px] flex flex-row gap-[55px]">
-        <div className = "w-[636px] h-[450px] border border-neutral-300 rounded-[5px] flex items-center justify-center flex-col">
-            <div className = "h-[100px] w-[550px]"></div>
-            <div className = "h-[250px] w-[520px] flex items-center pt-[10px]">
-                <Topic langList = {langList} langNumList = {langNumList} />
+      {/* Topics and Charts Section */}
+      <div className="w-full flex flex-col lg:flex-row gap-8 justify-center mb-10">
+        <div className="w-full lg:w-[636px] min-h-[450px] border border-zinc-200 rounded-lg flex flex-col items-center justify-center p-8 bg-white shadow-sm">
+            <h3 className="text-[13px] font-bold text-zinc-500 self-start mb-6 tracking-wider uppercase">Languages Used</h3>
+            <div className="w-full max-w-[500px]">
+                <Topic langList={langList} langNumList={langNumList} />
             </div>
-            
         </div>
-        <div className = "w-[636px] h-[450px] border border-black">
-
+        <div className="w-full lg:w-[636px] min-h-[450px] border border-zinc-200 rounded-lg bg-white shadow-sm p-8 flex items-center justify-center">
+            <p className="text-zinc-400 font-medium">Activity Heatmap Placeholder</p>
         </div>
       </div>
 
-    
-
-      <div className = "w-[1100px] h-[1250px] absolute left-[200px] top-[1000px] flex flex-col items-center gap-[20px] border border-gray-300 z-50 rounded-[5px] ">
-            <div className = "w-[1100px] h-[85px] flex flex-col items-center justify-center pt-[25px] gap-[10px]">
-                <div className = "w-[1000px] h-[20px] font-extrabold text-[14px] flex items-center pl-[60px]">
+      {/* Recent Submissions */}
+      <div className="w-full max-w-[1100px] border border-zinc-200 rounded-lg bg-white shadow-sm overflow-hidden mb-20">
+            <div className="px-10 py-8 border-b border-zinc-100">
+                <div className="font-extrabold text-[14px] text-zinc-900 tracking-wider">
                     RECENT SUBMISSIONS
                 </div>
-                <div className = "w-[1000px] h-[20px] text-gray-600 text-[15px] flex items-center pl-[60px]">
+                <div className="text-zinc-500 text-[14px] mt-1">
                     Latest activity on LeetCode
                 </div>
             </div>
-            <div className = "w-[900px] h-[3px] bg-black"></div>
-            {
-                data?.recentSubmissions?.map(item => (
-                    <RecentSubmissionBox 
-                    key = {item.id}
-                    title = {item.questionDetails.title}
-                    difficulty = {item.questionDetails.difficulty}
-                    acRate = {item.questionDetails.acRate}
-                    timestamp = {item.timestamp}
-                    />
-                ))
-            }
+            <div className="h-[3px] w-full bg-zinc-900"></div>
+            <div className="p-6 flex flex-col gap-4">
+                {
+                    data?.recentSubmissions?.map(item => (
+                        <RecentSubmissionBox 
+                            key={item.id}
+                            title={item.questionDetails.title}
+                            difficulty={item.questionDetails.difficulty}
+                            acRate={item.questionDetails.acRate}
+                            timestamp={item.timestamp}
+                        />
+                    ))
+                }
+            </div>
       </div>
     </div>
+  )
+}
   )
 }
 

@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Navbar from './Navbar'
 import Dash from './Dash.jsx'
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
 import './App.css'
 import LeetcodeBarChart from './components/Topic.jsx'
 import RecentSubmissionBox from './RecentSubmissionBox.jsx'
@@ -28,6 +28,7 @@ function App() {
       {loading && <Loader />}
       <Navbar />
       <Routes>
+        <Route path = "/" element = {<Navigate to="/dash" replace />}/>
         <Route path = "/dash" element = {<Dash />}/>
         <Route path = "/friends" element = {<Friends />}/>
         <Route path = "/searchfriend" element = {<SearchFriend />}/>
