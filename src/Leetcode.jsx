@@ -143,7 +143,5 @@ const Leetcode = () => {
     </div>
   )
 }
-  )
-}
 
 export default Leetcode
